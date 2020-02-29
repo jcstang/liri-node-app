@@ -1,6 +1,11 @@
 const dotenv = require('dotenv').config();
 const Spotify = require('node-spotify-api');
 const spotifyCreds = require('./spotifyCreds');
+// import Moment js
+// import Axios??
+// import OMDB API?
+// TODO: omdb api account
+// TODO: bands in town api account
 
 const config = {
   host: process.env.DB_HOST,
