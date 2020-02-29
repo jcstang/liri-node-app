@@ -1,0 +1,24 @@
+{
+  "name": "liri-node-app",
+  "version": "1.0.0",
+  "description": "like SIRI but liri",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jcstang/liri-node-app.git"
+  },
+  "author": "Jacob Stanger",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jcstang/liri-node-app/issues"
+  },
+  "homepage": "https://github.com/jcstang/liri-node-app#readme",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "node-spotify-api": "^1.1.1"
+  }
+}
