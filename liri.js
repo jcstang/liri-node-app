@@ -41,6 +41,9 @@ switch (args[0]) {
 // ===================================================
 
 function goGetBandData(searchTerm) {
+  // adds the %20 thing in the spaces
+  searchTerm = encodeURIComponent(searchTerm.trim());
+
   let queryURL = `https://rest.bandsintown.com/artists/${searchTerm}/events?app_id=codingbootcamp`;
 
   axios.get(queryURL)
@@ -48,13 +51,9 @@ function goGetBandData(searchTerm) {
       const data0 = response.data[0];
       console.log(`Artist:\t\t\t ${data0.artist.name}`);
       console.log(`Name of Venue:\t\t ${data0.venue.name}`);
-      console.log(`Venue location:\t`);
-      console.log(`Date of the Event:\t`);
-      
-      
-      
-      
-      
+      console.log(`Venue location:\t\t ${data0.venue.city}, ${data0.venue.region} ${data0.venue.country}`);
+      console.log(`Date of the Event:\t ${data0.datetime}`);
+
     });
 
 }
