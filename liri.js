@@ -43,14 +43,28 @@ switch (args[0]) {
 // ===================================================
 // functions
 // ===================================================
+
+function goGetMovieData(searchTerm) {
+  // axios query
+
+  // print this:
+  // title of movie
+  // year movie came out
+  // IMDB rating
+  // rotten tomatoes movie
+  // country where movie was produced
+  // language of movie
+  // plot of the movie (prob short).
+  // Actors in the movie
+}
+
+
 function goGetSpotifyData(searchTerm) {
   
   spotify.search({ type: 'track', query: searchTerm}, function(err, data) {
     if(err) {
       return console.log('Error occured: ' + err);
     }
-
-    // console.log(data);
 
     for (const obj of data.tracks.items) {
       // console.log(obj);
@@ -62,8 +76,8 @@ function goGetSpotifyData(searchTerm) {
       console.log(`spotify link:\t ${obj.external_urls.spotify}`);
       console.log("-----------------------------------------------\n");
       
-      
-      return
+      // only getting the first result
+      return;
     }
 
   });
