@@ -4,7 +4,7 @@ const axios = require('axios');
 const Spotify = require('node-spotify-api');
 
 let spotify = new Spotify(keys.mySpotifyCredentials);
-let usageMessage = "Usage: node liri.js <command> <searchTerm>";
+// let usageMessage = "Usage: node liri.js <command> <searchTerm>";
 
 
 function whichQuestion(argsArray) {
@@ -32,7 +32,7 @@ function whichQuestion(argsArray) {
       break;
     
     default:
-      console.log(usageMessage);
+      console.log("Usage: node liri.js <command> <searchTerm>");
       break;
   }
 }
