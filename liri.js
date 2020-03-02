@@ -26,7 +26,7 @@ switch (args[0]) {
     break;
 
   case 'movie-this':
-    console.log('find a movie?');
+    goGetMovieData(args[1]);
     break;
 
   case 'do-what-it-says':
@@ -45,7 +45,28 @@ switch (args[0]) {
 // ===================================================
 
 function goGetMovieData(searchTerm) {
-  // axios query
+  searchTerm = encodeURIComponent(searchTerm.trim());
+  let queryURL = `http://www.omdbapi.com/?t=${searchTerm}&y=&plot=short&apikey=trilogy`;
+
+  axios.get(queryURL)
+    .then(response => {
+      // console.log(response.data);
+      let movieData = response.data;
+
+      if (movieData) {
+        console.log("-----------------------------------------------");
+        console.log(`Title:\t\t\t ${movieData.Title}`);
+        console.log(`Year:\t\t\t ${movieData.Year}`);
+        console.log(`IMDB rating:\t\t ${movieData.Ratings[0].Value}`);
+        console.log(`Rotten Tomatoes rating:\t ${movieData.Ratings[1].Value}`);
+        console.log(`Movie Produced in:\t ${movieData.Country}`);
+        console.log(`Language:\t\t ${movieData.Language}`);
+        console.log(`Plot:\t ${movieData.Plot}`);
+        console.log(`Actors:\t ${movieData.Actors}`);
+        console.log("-----------------------------------------------");
+      }
+
+    });
 
   // print this:
   // title of movie
