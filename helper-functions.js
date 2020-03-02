@@ -4,27 +4,26 @@ const axios = require('axios');
 const Spotify = require('node-spotify-api');
 
 let spotify = new Spotify(keys.mySpotifyCredentials);
-// let usageMessage = "Usage: node liri.js <command> <searchTerm>";
 
 
+// ===================================================
+// functions
+// ===================================================
 function whichQuestion(argsArray) {
   const userCommand = argsArray[0];
   const searchParam = argsArray[1];
 
   switch (userCommand) {
     case 'concert-this':
-      helperFuncs.goGetBandData(searchParam);
-      // goGetBandData(args[1]);
+      goGetBandData(searchParam);
       break;
     
     case 'spotify-this-song':
-      helperFuncs.goGetSpotifyData(searchParam);
-      // goGetSpotifyData(args[1]);
+      goGetSpotifyData(searchParam);
       break;
     
     case 'movie-this':
-      helperFuncs.goGetMovieData(searchParam);
-      // goGetMovieData(args[1]);
+      goGetMovieData(searchParam);
       break;
     
     case 'do-what-it-says':
@@ -36,8 +35,6 @@ function whichQuestion(argsArray) {
       break;
   }
 }
-
-
 
 
 function goGetMovieData(searchTerm) {
@@ -81,6 +78,7 @@ function goGetMovieData(searchTerm) {
 
 }
 
+
 function goGetSpotifyData(searchTerm) {
 
   spotify.search({ type: 'track', query: searchTerm }, function (err, data) {
@@ -104,6 +102,7 @@ function goGetSpotifyData(searchTerm) {
 
   });
 }
+
 
 function goGetBandData(searchTerm) {
   // adds the %20 thing in the spaces
@@ -129,6 +128,10 @@ function goGetBandData(searchTerm) {
 
 }
 
+
+// ===================================================
+// EXPORTS
+// ===================================================
 module.exports = {
   goGetMovieData: goGetMovieData,
   goGetSpotifyData: goGetSpotifyData,
