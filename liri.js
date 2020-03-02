@@ -47,13 +47,17 @@ switch (args[0]) {
 function goGetMovieData(searchTerm) {
   searchTerm = encodeURIComponent(searchTerm.trim());
   let queryURL = `http://www.omdbapi.com/?t=${searchTerm}&y=&plot=short&apikey=trilogy`;
-
-  axios.get(queryURL)
-    .then(response => {
-      // console.log(response.data);
+    
+    axios.get(queryURL)
+    .then(function (response) {
+      // handle success
+      // console.log(response);
       let movieData = response.data;
 
-      if (movieData) {
+      if (movieData.Response === 'False') {
+        return console.log(`No go!... ${movieData.Error}`);
+      } else {
+        // found a movie
         console.log("-----------------------------------------------");
         console.log(`Title:\t\t\t ${movieData.Title}`);
         console.log(`Year:\t\t\t ${movieData.Year}`);
@@ -64,8 +68,19 @@ function goGetMovieData(searchTerm) {
         console.log(`Plot:\t ${movieData.Plot}`);
         console.log(`Actors:\t ${movieData.Actors}`);
         console.log("-----------------------------------------------");
+
       }
 
+    })
+    .catch(function (error) {
+      console.log(error);
+    })
+    .finally(function () {
+      // always executed
+      console.log(
+        `\nBye!`
+      );
+      
     });
 
   // print this:
@@ -81,9 +96,9 @@ function goGetMovieData(searchTerm) {
 
 
 function goGetSpotifyData(searchTerm) {
-  
-  spotify.search({ type: 'track', query: searchTerm}, function(err, data) {
-    if(err) {
+
+  spotify.search({ type: 'track', query: searchTerm }, function (err, data) {
+    if (err) {
       return console.log('Error occured: ' + err);
     }
 
@@ -96,7 +111,7 @@ function goGetSpotifyData(searchTerm) {
       console.log(`album:\t\t ${obj.album.name}`);
       console.log(`spotify link:\t ${obj.external_urls.spotify}`);
       console.log("-----------------------------------------------\n");
-      
+
       // only getting the first result
       return;
     }
