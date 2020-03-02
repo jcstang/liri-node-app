@@ -2,6 +2,8 @@ const dotenv = require("dotenv").config();
 const keys = require("./keys.js");
 const axios = require('axios');
 const Spotify = require('node-spotify-api');
+const fileAccess = require('fs');
+const runCommand = require('child_process');
 
 let spotify = new Spotify(keys.mySpotifyCredentials);
 
@@ -9,7 +11,7 @@ let spotify = new Spotify(keys.mySpotifyCredentials);
 // ===================================================
 // functions
 // ===================================================
-function whichQuestion(argsArray) {
+function runMainProcess(argsArray) {
   const userCommand = argsArray[0];
   const searchParam = argsArray[1];
 
@@ -27,13 +29,53 @@ function whichQuestion(argsArray) {
       break;
     
     case 'do-what-it-says':
-      console.log('do what it says!');
+      console.log('Looking at: random.txt for instructions...');
+      doWhatFileSays();
       break;
     
     default:
       console.log("Usage: node liri.js <command> <searchTerm>");
       break;
   }
+}
+
+function doWhatFileSays() {
+  fileAccess.readFile('./random.txt', { encoding: 'utf8'}, function(err, data) {
+    if (err) {
+      console.error(error);
+    }
+
+    //success
+    let commandString = 'node liri.js';
+    let fileArr = data.split(',');
+
+    fileArr.forEach(element => {
+      commandString += ` ${element}`;
+    });
+
+    // console.log(commandString);
+
+    // runCommand.spawn(commandString);
+    runCommand.exec(commandString, (err, stdout, stderr) => {
+      if (err) {
+        console.log(`error: ${error.message}`);
+        return;
+      }
+
+      if(stderr) {
+        console.log(`stderr: ${stderr}`);
+        return;
+      }
+      console.log('thinking...');
+      // console.log(`stdout: ${stdout}`);
+      console.log(stdout);
+    
+
+    });
+
+
+  });
+
 }
 
 
@@ -136,5 +178,5 @@ module.exports = {
   goGetMovieData: goGetMovieData,
   goGetSpotifyData: goGetSpotifyData,
   goGetBandData: goGetBandData,
-  whichQuestion: whichQuestion
+  runMainProcess: runMainProcess
 }
