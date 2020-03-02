@@ -1,17 +1,15 @@
-require("dotenv").config();
+const dotenv = require("dotenv").config();
 const Spotify = require('node-spotify-api');
 const keys = require("./keys.js");
 const axios = require('axios');
 
 let spotify = new Spotify(keys.mySpotifyCredentials);
 
-// TODO: get command line args
 let args = process.argv.slice(2);
-let argLength = process.argv.length;
 let usageMessage = "Usage: node liri.js <command> <searchTerm>";
 
 
-if (argLength <= 2) {
+if (args.length <= 0) {
   console.log(usageMessage);
   process.exit(-1);
 }
@@ -20,15 +18,19 @@ switch (args[0]) {
   case 'concert-this':
     goGetBandData(args[1]);
     break;
+
   case 'spotify-this-song':
-    console.log('spotiy the song?');
+    goGetSpotifyData(args[1]);
     break;
+
   case 'movie-this':
     console.log('find a movie?');
     break;
+
   case 'do-what-it-says':
     console.log('do what it says!');
     break;
+
   default:
     console.log(usageMessage);
     break;
@@ -39,6 +41,17 @@ switch (args[0]) {
 // ===================================================
 // functions
 // ===================================================
+function goGetSpotifyData(searchTerm) {
+  spotify.search({ type: 'track', query: searchTerm}, function(err, data) {
+    if(err) {
+      return console.log('Error occured: ' + err);
+    }
+
+    console.log(data);
+
+  });
+}
+
 
 function goGetBandData(searchTerm) {
   // adds the %20 thing in the spaces
