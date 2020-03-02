@@ -1,4 +1,4 @@
-console.log('Spotify keys file loaded\n');
+console.log('Spotify keys file loaded');
 
 // what is the difference between:
 // this (in instructions)

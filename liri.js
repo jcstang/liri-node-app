@@ -14,6 +14,8 @@ if (args.length <= 0) {
   process.exit(-1);
 }
 
+console.log('Wait for it......\n');
+
 switch (args[0]) {
   case 'concert-this':
     goGetBandData(args[1]);
@@ -42,12 +44,27 @@ switch (args[0]) {
 // functions
 // ===================================================
 function goGetSpotifyData(searchTerm) {
+  
   spotify.search({ type: 'track', query: searchTerm}, function(err, data) {
     if(err) {
       return console.log('Error occured: ' + err);
     }
 
-    console.log(data);
+    // console.log(data);
+
+    for (const obj of data.tracks.items) {
+      // console.log(obj);
+
+      console.log("-----------------------------------------------");
+      console.log(`Artist:\t\t ${obj.album.artists[0].name}`);
+      console.log(`Song:\t\t ${obj.name}`);
+      console.log(`album:\t\t ${obj.album.name}`);
+      console.log(`spotify link:\t ${obj.external_urls.spotify}`);
+      console.log("-----------------------------------------------\n");
+      
+      
+      return
+    }
 
   });
 }
