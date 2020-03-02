@@ -8,4 +8,4 @@ if (process.argv.slice(2).length <= 0) {
 }
 
 console.log('Wait for it......\n');
-helperFuncs.whichQuestion( process.argv.slice(2) );
+helperFuncs.runMainProcess( process.argv.slice(2) );
