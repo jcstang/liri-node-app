@@ -4,6 +4,7 @@ const axios = require('axios');
 const Spotify = require('node-spotify-api');
 const fileAccess = require('fs');
 const runCommand = require('child_process');
+const movie = require('@jcstang/get-movie');
 
 let spotify = new Spotify(keys.mySpotifyCredentials);
 
@@ -25,7 +26,8 @@ function runMainProcess(argsArray) {
       break;
     
     case 'movie-this':
-      goGetMovieData(searchParam);
+      // goGetMovieData(searchParam);
+      movie.getMovie(searchParam, 'trilogy');
       break;
     
     case 'do-what-it-says':
