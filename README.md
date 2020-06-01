@@ -10,7 +10,7 @@ Things I wanted it to do:
 
 
 ## Overview
-App is a command line tool, using node to run a file, command, and search term. 
+App is a command line tool, using node to run a file, command, and search term. What makes me exited about this project is how clean my start file ended up being. I wanted to utilize helper functions.
 
 ## Tech used in the project
 * Node.js
